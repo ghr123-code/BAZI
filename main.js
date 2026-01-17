@@ -297,23 +297,19 @@ class DailyFortuneViewer extends HTMLElement {
 
     connectedCallback() {
         this._populateFortunes();
-        // Date picker integration can be added here
         const datePicker = document.querySelector('#fortune-date');
         if (datePicker) {
             datePicker.addEventListener('change', (event) => {
-                // You can add logic to change fortunes based on the date
-                // For now, it just re-populates the same ones
                 console.log('Date changed to:', event.target.value);
                 this._populateFortunes(); 
             });
-            // Set default date to today
             datePicker.valueAsDate = new Date();
         }
     }
 
     _populateFortunes() {
         const container = this.shadowRoot.querySelector('#fortune-container');
-        container.innerHTML = ''; // Clear existing fortunes
+        container.innerHTML = ''; 
         for (const [zodiac, fortune] of Object.entries(this._fortunes)) {
             const item = document.createElement('div');
             item.className = 'fortune-item';
@@ -323,6 +319,216 @@ class DailyFortuneViewer extends HTMLElement {
     }
 }
 customElements.define('daily-fortune-viewer', DailyFortuneViewer);
+
+
+// Fusion Astrology Result Web Component
+class FusionAstrologyResult extends HTMLElement {
+    constructor() {
+        super();
+        this.attachShadow({ mode: 'open' });
+    }
+
+    showResult(birthDate, birthTime) {
+        this._render(birthDate, birthTime);
+    }
+
+    _getZodiacSign(date) {
+        const day = date.getDate();
+        const month = date.getMonth() + 1;
+        if ((month == 1 && day >= 20) || (month == 2 && day <= 18)) return "물병자리";
+        if ((month == 2 && day >= 19) || (month == 3 && day <= 20)) return "물고기자리";
+        if ((month == 3 && day >= 21) || (month == 4 && day <= 19)) return "양자리";
+        if ((month == 4 && day >= 20) || (month == 5 && day <= 20)) return "황소자리";
+        if ((month == 5 && day >= 21) || (month == 6 && day <= 21)) return "쌍둥이자리";
+        if ((month == 6 && day >= 22) || (month == 7 && day <= 22)) return "게자리";
+        if ((month == 7 && day >= 23) || (month == 8 && day <= 22)) return "사자자리";
+        if ((month == 8 && day >= 23) || (month == 9 && day <= 23)) return "처녀자리";
+        if ((month == 9 && day >= 24) || (month == 10 && day <= 22)) return "천칭자리";
+        if ((month == 10 && day >= 23) || (month == 11 && day <= 22)) return "전갈자리";
+        if ((month == 11 && day >= 23) || (month == 12 && day <= 24)) return "사수자리";
+        if ((month == 12 && day >= 25) || (month == 1 && day <= 19)) return "염소자리";
+    }
+
+    _calculateSajuPillars(date, time) {
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        const hour = parseInt(time.split(':')[0]);
+
+        const gan = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
+        const ji = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
+        const timeJi = [ "자", "축", "인", "묘", "진", "사", "오", "미", "신", "유", "술", "해"];
+
+        let hourIndex;
+        if (hour >= 23 || hour < 1) hourIndex = 0;
+        else if (hour >= 1 && hour < 3) hourIndex = 1;
+        else if (hour >= 3 && hour < 5) hourIndex = 2;
+        else if (hour >= 5 && hour < 7) hourIndex = 3;
+        else if (hour >= 7 && hour < 9) hourIndex = 4;
+        else if (hour >= 9 && hour < 11) hourIndex = 5;
+        else if (hour >= 11 && hour < 13) hourIndex = 6;
+        else if (hour >= 13 && hour < 15) hourIndex = 7;
+        else if (hour >= 15 && hour < 17) hourIndex = 8;
+        else if (hour >= 17 && hour < 19) hourIndex = 9;
+        else if (hour >= 19 && hour < 21) hourIndex = 10;
+        else if (hour >= 21 && hour < 23) hourIndex = 11;
+
+        return {
+            year: gan[(year - 4) % 10] + ji[(year - 4) % 12],
+            month: gan[(month - 1) % 10] + ji[(month - 1) % 12],
+            day: gan[(day - 1) % 10] + ji[(day - 1) % 12],
+            time: gan[hourIndex % 10] + ji[hourIndex % 12]
+        };
+    }
+
+    _render(birthDate, birthTime) {
+        const date = new Date(birthDate);
+        const zodiacSign = this._getZodiacSign(date);
+        const sajuPillars = this._calculateSajuPillars(date, birthTime);
+        const dayGan = sajuPillars.day[0]; 
+
+        const dayGanMeaning = {
+            "甲": "당신은 큰 나무처럼 꿋꿋하고 리더십이 있는 사람이군요.",
+            "乙": "당신은 부드러운 꽃처럼 유연하고 적응력이 뛰어난 분입니다.",
+            "丙": "밝은 태양처럼 열정적이고 명랑한 에너지를 가지고 있습니다.",
+            "丁": "밤하늘의 촛불처럼 따뜻하고 섬세한 마음씨를 지녔네요.",
+            "戊": "넓은 산처럼 듬직하고 신뢰를 주는 든든한 사람입니다.",
+            "己": "비옥한 땅과 같이 포용력이 넓고 안정감을 주는 성격입니다.",
+            "庚": "단단한 바위처럼 강한 의지와 결단력을 가지고 있습니다.",
+            "辛": "날카로운 보석처럼 예리한 직관력과 세련된 감각을 지녔습니다.",
+            "壬": "넓은 바다처럼 지혜롭고 자유로운 영혼의 소유자입니다.",
+            "癸": "촉촉한 비처럼 차분하고 타인을 돕는 선한 마음을 가졌습니다."
+        };
+        
+        this.shadowRoot.innerHTML = `
+            <style>
+                .fusion-result {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 2rem;
+                    padding: 2rem;
+                    background-color: #1a1a2e;
+                    border-radius: 8px;
+                    border: 1px solid var(--secondary-color, #0f3460);
+                    animation: fadeIn 1s ease-in-out;
+                }
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: translateY(20px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+                .result-card {
+                    background-color: #2a2a3e;
+                    padding: 1.5rem;
+                    border-radius: 8px;
+                }
+                .card-title {
+                    font-size: 1.8rem;
+                    font-weight: bold;
+                    color: var(--gold-color, #ffd700);
+                    margin: 0 0 1rem 0;
+                    display: flex;
+                    align-items: center;
+                }
+                .card-title img {
+                    width: 40px;
+                    margin-right: 1rem;
+                }
+                .card-content p {
+                    font-size: 1rem;
+                    line-height: 1.6;
+                    color: var(--text-color, #dcdcdc);
+                }
+                .saju-p-title {
+                    font-size: 1rem;
+                    color: var(--text-color, #dcdcdc);
+                    margin-bottom: 0.5rem;
+                }
+                 .ganji-r {
+                    font-size: 1.8rem;
+                    font-weight: bold;
+                    color: var(--header-color, #ffffff);
+                }
+                .saju-pillars {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 1rem;
+                    text-align: center;
+                    margin-top: 1rem;
+                }
+                 .pillar-r {
+                    padding: 1rem;
+                    background-color: #1a1a2e;
+                    border-radius: 5px;
+                }
+
+                @media (max-width: 768px) {
+                    .fusion-result {
+                        grid-template-columns: 1fr;
+                    }
+                }
+            </style>
+            <div class="fusion-result">
+                <div class="result-card" id="saju-card">
+                    <h3 class="card-title">
+                        <img src="https://em-content.zobj.net/source/samsung/383/scroll_1f4dc.png" alt="사주 아이콘">
+                        당신의 사주 속 본질
+                    </h3>
+                    <div class="card-content">
+                        <p>사주로 본 당신의 핵심 성향은 <strong>'${dayGan}'</strong> 입니다.</p>
+                        <p>${dayGanMeaning[dayGan] || "당신의 특성을 분석 중입니다."}</p>
+                        <div class="saju-pillars">
+                             <div class="pillar-r">
+                                <div class="saju-p-title">태어난 해</div>
+                                <div class="ganji-r">${sajuPillars.year}</div>
+                            </div>
+                            <div class="pillar-r">
+                                <div class="saju-p-title">태어난 달</div>
+                                <div class="ganji-r">${sajuPillars.month}</div>
+                            </div>
+                            <div class="pillar-r">
+                                <div class="saju-p-title">태어난 날</div>
+                                <div class="ganji-r">${sajuPillars.day}</div>
+                            </div>
+                            <div class="pillar-r">
+                                <div class="saju-p-title">태어난 시간</div>
+                                <div class="ganji-r">${sajuPillars.time}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="result-card" id="astrology-card">
+                    <h3 class="card-title">
+                         <img src="https://em-content.zobj.net/source/samsung/383/crystal-ball_1f52e.png" alt="별자리 아이콘">
+                        당신의 별자리 성향
+                    </h3>
+                    <div class="card-content">
+                        <p>밤하늘의 별자리는 당신이 <strong>${zodiacSign}</strong>이라고 말해주네요.</p>
+                        <p>${this._getZodiacMeaning(zodiacSign)}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    _getZodiacMeaning(sign) {
+        const meanings = {
+            "물병자리": "독창적이고 인도주의적인 당신은 세상을 더 나은 곳으로 만들고 싶어 하는 혁신가입니다.",
+            "물고기자리": "몽환적이고 예술적인 감성을 지닌 당신은 깊은 공감 능력으로 다른 사람의 마음을 잘 이해합니다.",
+            "양자리": "용감하고 열정적인 당신은 언제나 새로운 도전을 즐기는 타고난 리더입니다.",
+            "황소자리": "안정적이고 신뢰할 수 있는 당신은 아름다운 것들을 사랑하는 현실적인 몽상가입니다.",
+            "쌍둥이자리": "호기심 많고 재치 있는 당신은 주변 사람들과 소통하며 즐거움을 찾는 분위기 메이커입니다.",
+            "게자리": "따뜻하고 감성적인 당신은 자신의 사람들을 아끼고 보살피는 것을 가장 중요하게 생각합니다.",
+            "사자자리": "자신감 넘치고 관대한 당신은 무대 위에서 빛나는 주인공처럼 다른 사람들의 주목을 즐깁니다.",
+            "처녀자리": "꼼꼼하고 실용적인 당신은 모든 것을 완벽하게 해내고 싶어 하는 성실한 노력가입니다.",
+            "천칭자리": "균형 감각이 뛰어나고 사교적인 당신은 조화로운 관계 속에서 행복을 찾는 외교관입니다.",
+            "전갈자리": "강렬하고 직관적인 당신은 한번 목표를 정하면 끝까지 파고드는 뛰어난 통찰력의 소유자입니다.",
+            "사수자리": "자유로운 영혼의 소유자인 당신은 새로운 것을 배우고 경험하기 위해 언제든 떠날 준비가 되어 있습니다.",
+            "염소자리": "책임감이 강하고 야망 있는 당신은 꾸준한 노력으로 결국 목표를 이루어내는 전략가입니다."
+        };
+        return meanings[sign] || "당신의 별자리 특성을 분석 중입니다.";
+    }
+}
+customElements.define('fusion-astrology-result', FusionAstrologyResult);
 
 
 // --- Global Event Listeners --- //
@@ -352,4 +558,24 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('콘텐츠 보호를 위해 개발자 도구 사용이 금지되었습니다.');
         }
     });
+
+    // --- Fusion Astrology Form --- //
+    const fusionForm = document.querySelector('#fusion-form');
+    if (fusionForm) {
+        fusionForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const birthdate = document.querySelector('#birthdate').value;
+            const birthtime = document.querySelector('#birthtime').value;
+            
+            if (!birthdate || !birthtime) {
+                alert('생년월일과 시간을 모두 입력해주세요.');
+                return;
+            }
+
+            const resultContainer = document.querySelector('#fusion-result-container');
+            resultContainer.innerHTML = '<fusion-astrology-result></fusion-astrology-result>';
+            const fusionResultElement = document.querySelector('fusion-astrology-result');
+            fusionResultElement.showResult(birthdate, birthtime);
+        });
+    }
 });
