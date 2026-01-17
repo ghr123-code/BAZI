@@ -325,8 +325,9 @@ class DailyFortuneViewer extends HTMLElement {
 customElements.define('daily-fortune-viewer', DailyFortuneViewer);
 
 
-// --- Navigation Toggle for Mobile --- //
+// --- Global Event Listeners --- //
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Navigation Toggle for Mobile --- //
     const navToggle = document.querySelector('.nav-toggle');
     const nav = document.querySelector('header nav');
 
@@ -336,4 +337,19 @@ document.addEventListener('DOMContentLoaded', () => {
             navToggle.classList.toggle('active');
         });
     }
+
+    // --- Content Protection --- //
+    document.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        alert('콘텐츠 보호를 위해 마우스 오른쪽 클릭이 금지되었습니다.');
+    });
+
+    document.body.style.cssText = "user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;";
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.shiftKey && e.key === 'J') || (e.ctrlKey && e.key === 'U') || (e.ctrlKey && e.key === 'S')) {
+            e.preventDefault();
+            alert('콘텐츠 보호를 위해 개발자 도구 사용이 금지되었습니다.');
+        }
+    });
 });
