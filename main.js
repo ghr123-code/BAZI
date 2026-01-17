@@ -96,15 +96,15 @@ class SajuCalculator extends HTMLElement {
                 <div class="calculator-form">
                     <div class="form-group">
                         <label for="year">생년</label>
-                        <input type="number" id="year" placeholder="예: 1990" required>
+                        <select id="year" required></select>
                     </div>
                     <div class="form-group">
                         <label for="month">생월</label>
-                        <input type="number" id="month" placeholder="예: 5" required>
+                        <select id="month" required></select>
                     </div>
                     <div class="form-group">
                         <label for="day">생일</label>
-                        <input type="number" id="day" placeholder="예: 15" required>
+                        <select id="day" required></select>
                     </div>
                     <div class="form-group">
                         <label for="hour">태어난 시</label>
@@ -154,7 +154,40 @@ class SajuCalculator extends HTMLElement {
     connectedCallback() {
         const btn = this.shadowRoot.querySelector('#calculate-btn');
         btn.addEventListener('click', () => this._calculateSaju());
+        this._populateDateSelectors();
     }
+
+    _populateDateSelectors() {
+        const yearSelect = this.shadowRoot.querySelector('#year');
+        const monthSelect = this.shadowRoot.querySelector('#month');
+        const daySelect = this.shadowRoot.querySelector('#day');
+
+        // Populate years
+        const currentYear = new Date().getFullYear();
+        for (let i = currentYear; i >= 1900; i--) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = `${i}년`;
+            yearSelect.appendChild(option);
+        }
+
+        // Populate months
+        for (let i = 1; i <= 12; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = `${i}월`;
+            monthSelect.appendChild(option);
+        }
+
+        // Populate days
+        for (let i = 1; i <= 31; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = `${i}일`;
+            daySelect.appendChild(option);
+        }
+    }
+
 
     _calculateSaju() {
         const year = this.shadowRoot.querySelector('#year').value;

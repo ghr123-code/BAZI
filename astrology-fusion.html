@@ -25,7 +25,6 @@
     <link rel="stylesheet" href="style.css">
 
     <!-- Google Analytics & Adsense (Placeholder) -->
-    <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -37,6 +36,10 @@
 </head>
 <body>
     <header>
+        <a href="index.html" class="logo">사주팔자: 인생의 나침반</a>
+        <button class="nav-toggle" aria-label="Toggle navigation">
+            <span class="hamburger"></span>
+        </button>
         <nav>
             <a href="index.html">홈</a>
             <a href="saju-basics.html">사주초급</a>
@@ -56,19 +59,10 @@
             </p>
         </section>
 
-        <section id="fusion-calculator">
-            <h2>생년월일시를 입력하고 나의 퓨전 운세 확인하기</h2>
-            <form id="fusion-form">
-                <div class="input-group">
-                    <label for="birthdate">생년월일</label>
-                    <input type="date" id="birthdate" name="birthdate" required>
-                </div>
-                <div class="input-group">
-                    <label for="birthtime">태어난 시간</label>
-                    <input type="time" id="birthtime" name="birthtime" required>
-                </div>
-                <button type="submit">결과 보기</button>
-            </form>
+        <section id="calculator">
+            <h2>나의 사주팔자 확인하기</h2>
+            <p>당신의 양력 생년월일시를 정확히 입력해주세요. 만세력에 따라 당신의 사주팔자를 보여드립니다. 입력된 정보는 저장되지 않으니 안심하고 이용하세요.</p>
+            <saju-calculator></saju-calculator>
         </section>
         
         <section id="fusion-result-container">

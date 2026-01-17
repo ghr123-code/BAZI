@@ -31,25 +31,23 @@
 </head>
 <body>
     <header>
-        <h1><a href="index.html">사주팔자: 인생의 나침반</a></h1>
+        <a href="index.html" class="logo">사주팔자: 인생의 나침반</a>
         <button class="nav-toggle" aria-label="Toggle navigation">
             <span class="hamburger"></span>
         </button>
         <nav>
-            <ul>
-                <li><a href="index.html">홈</a></li>
-                <li><a href="saju-basics.html">사주 기초</a></li>
-                <li><a href="12-deities.html">십이신살</a></li>
-                <li><a href="glossary.html">용어 사전</a></li>
-                <li><a href="love-compatibility.html">궁합</a></li>
-                <li><a href="daily-fortune.html">오늘의 운세</a></li>
-            </ul>
+            <a href="index.html">홈</a>
+            <a href="saju-basics.html">사주초급</a>
+            <a href="love-compatibility.html" class="active">궁합보기</a>
+            <a href="daily-fortune.html">오늘의 운세</a>
+            <a href="astrology-fusion.html">사주&별자리</a>
+            <a href="glossary.html">용어사전</a>
         </nav>
     </header>
 
     <main>
         <section>
-            <h2>사주 궁합: 천생연분은 정해져 있을까?</h2>
+            <h1>사주 궁합: 천생연분은 정해져 있을까?</h1>
             <p>궁합(宮合)은 두 사람의 사주팔자를 비교하여 서로의 관계가 어떠할지를 예측하는 것입니다. 단순히 '좋다' 또는 '나쁘다'로 결론 내리는 것이 아니라, 각자의 부족한 기운을 상대방이 채워줄 수 있는지, 혹은 서로에게 어떤 영향을 주고받는지를 분석하여 조화로운 관계를 만들어나가는 데 목적이 있습니다.</p>
         </section>
 
@@ -70,7 +68,7 @@
             <p>궁합이 좋지 않게 나왔다고 해서 무조건 헤어져야 하는 것은 아닙니다. 서로의 차이점을 미리 이해하고, 갈등이 생길 수 있는 부분을 인지하고 노력한다면 어떤 관계든 긍정적으로 만들어갈 수 있습니다. 궁합은 미래를 결정하는 절대적인 예언이 아니라, 두 사람이 함께 행복해지기 위한 길을 알려주는 '관계 내비게이션'과 같습니다.</p>
         </section>
 
-        <section>
+        <section id="calculator">
             <h2>궁합 계산기</h2>
             <p>두 사람의 생년월일시를 입력하여 서로의 궁합을 분석해 보세요.</p>
             <love-compatibility-calculator></love-compatibility-calculator>
@@ -78,13 +76,13 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 사주팔자. All rights reserved.</p>
         <nav>
-            <a href="privacy.html">개인정보처리방침</a> |
-            <a href="terms.html">이용약관</a> |
+            <a href="terms.html">이용약관</a>
+            <a href="privacy.html">개인정보처리방침</a>
             <a href="contact.html">문의하기</a>
         </nav>
+        <p>&copy; 2024 BAZI. All rights reserved.</p>
     </footer>
-    <script src="main.js" type="module" defer></script>
+    <script src="main.js" type="module"></script>
 </body>
 </html>
