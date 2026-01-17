@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://bazi-2ix.pages.dev/sitemap.xml
