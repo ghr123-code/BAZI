@@ -1,1 +1,165 @@
-/* Add styles here */
+/* --- Reset & Base --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-color: #1a1a2e;
+    --primary-color: #16213e;
+    --secondary-color: #0f3460;
+    --accent-color: #e94560;
+    --text-color: #dcdcdc;
+    --header-color: #ffffff;
+    --gold-color: #ffd700;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+}
+
+h1, h2 {
+    font-family: 'KoPub Batang', serif;
+    color: var(--header-color);
+    font-weight: 600;
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--gold-color);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* --- Layout & Structure --- */
+header {
+    background-color: var(--primary-color);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+header h1 a {
+    font-size: 1.5rem;
+    color: var(--header-color);
+    font-weight: bold;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+main {
+    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+section {
+    background-color: var(--primary-color);
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--secondary-color);
+}
+
+section h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--gold-color);
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 0.5rem;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    margin-top: 2rem;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+.footer-links {
+    margin-bottom: 1rem;
+}
+
+.footer-links a {
+    margin: 0 1rem;
+    color: var(--text-color);
+}
+
+/* --- Hero Section --- */
+#hero {
+    background: linear-gradient(rgba(22, 33, 62, 0.8), rgba(26, 26, 46, 0.9)), url('https://images.unsplash.com/photo-1534270804882-6b5025b4ea15?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+    text-align: center;
+    padding: 5rem 2rem;
+    border-radius: 12px;
+}
+
+.hero-text h2 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    color: var(--header-color);
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+
+/* --- Saju Calculator --- */
+saju-calculator {
+    display: block;
+    margin-top: 2rem;
+    padding: 2rem;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    header nav ul {
+        margin-top: 1rem;
+        gap: 1rem;
+    }
+
+    main {
+        padding: 1rem;
+    }
+
+    section {
+        padding: 2rem;
+    }
+
+    .hero-text h2 {
+        font-size: 2.2rem;
+    }
+}

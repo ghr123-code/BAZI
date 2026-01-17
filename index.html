@@ -1,14 +1,63 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사주팔자 - 당신의 인생 나침반</title>
+    <meta name="description" content="사주팔자에 대한 깊이 있는 정보와 함께 당신의 타고난 기운을 확인해보세요. 사주팔자의 역사, 철학, 그리고 현대적 해석까지 모든 것을 담았습니다.">
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" type="module" defer></script>
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+    <header>
+        <h1><a href="/">사주팔자: 인생의 나침반</a></h1>
+        <nav>
+            <ul>
+                <li><a href="#history">사주의 역사</a></li>
+                <li><a href="#philosophy">사주의 철학</a></li>
+                <li><a href="#calculator">나의 사주팔자</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="hero-text">
+                <h2>하늘의 시간, 땅의 공간, 그리고 당신</h2>
+                <p>태어난 순간에 깃든 우주의 기운, 사주팔자를 통해 당신의 가능성을 탐색하고 인생의 지혜를 얻으세요.</p>
+            </div>
+        </section>
+
+        <section id="introduction">
+            <h2>사주팔자란 무엇인가?</h2>
+            <p>사주팔자(四柱八字)는 사람이 태어난 연(年), 월(月), 일(日), 시(時)의 네 기둥(四柱)에 각각 두 글자씩, 총 여덟 글자(八字)를 부여하여 개인의 길흉화복을 알아보는 동양의 전통적인 운명학입니다. 이는 단순한 점술을 넘어, 음양오행의 철학을 바탕으로 개인의 기질과 잠재력을 분석하는 정교한 학문 체계입니다.</p>
+        </section>
+
+        <section id="history">
+            <h2>사주팔자의 역사</h2>
+            <p>사주팔자의 기원은 고대 중국의 당나라 시대로 거슬러 올라갑니다. 당시 이허중(李虛中)이라는 인물이 사람이 태어난 연, 월, 일의 세 기둥(삼주)으로 운명을 간명한 것이 시초로 알려져 있습니다. 이후 송나라 시대의 서자평(徐子平)에 이르러 태어난 시(時)까지 포함하는 네 기둥, 즉 오늘날의 사주팔자 체계가 완성되었습니다. 한국에는 고려 시대에 전래되어 조선 시대를 거치며 백성은 물론 왕실에서도 깊은 관심을 받는 학문으로 자리 잡았습니다.</p>
+        </section>
+
+        <section id="philosophy">
+            <h2>사주팔자의 철학: 음양오행설</h2>
+            <p>사주팔자의 핵심은 우주 만물의 생성과 소멸을 설명하는 음양오행설(陰陽五行說)에 있습니다. 음(陰)과 양(陽)이라는 두 가지 기운의 상호작용, 그리고 목(木), 화(火), 토(土), 금(金), 수(水)라는 다섯 가지 원소의 상생(相生)과 상극(相剋) 관계를 통해 여덟 글자에 담긴 복잡한 의미를 해석합니다. 이를 통해 개인의 성격, 적성, 건강, 그리고 인생의 전반적인 흐름을 예측하고 더 나은 방향을 모색합니다.</p>
+        </section>
+
+        <section id="calculator">
+            <h2>나의 사주팔자 확인하기</h2>
+            <p>당신의 양력 생년월일시를 정확히 입력해주세요. 만세력에 따라 당신의 사주팔자를 보여드립니다.</p>
+            <saju-calculator></saju-calculator>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="#">개인정보 처리방침</a>
+            <a href="#">서비스 이용약관</a>
+            <a href="#">문의하기</a>
+        </div>
+        <p>&copy; 2024 사주팔자. All rights reserved.</p>
+    </footer>
+
 </body>
 </html>
