@@ -65,10 +65,10 @@
 
 *    **정식 도메인 URL 변경:** 사용자의 실제 운영 도메인인 `bazi-2ix.pages.dev`를 반영하기 위해 모든 HTML 파일의 `<link rel="canonical">` 태그와 `og:url` 메타 태그의 URL을 `ghr123-code.github.io/BAZI/`에서 `bazi-2ix.pages.dev`로 수정했습니다. 이를 통해 검색 엔진과 소셜 미디어 플랫폼이 정확한 대표 URL을 참조하도록 하여 SEO 및 공유 효율성을 높였습니다.
 
-### 6단계: robots.txt 및 sitemap.xml 생성 (완료)
+### 6단계: robots.txt 및 sitemap.xml 최적화 (완료)
 
 *   **sitemap.xml 생성:** 검색 엔진이 사이트의 모든 페이지를 효율적으로 발견하고 크롤링할 수 있도록, 사이트의 전체 페이지 목록을 포함하는 `sitemap.xml` 파일을 생성했습니다. 각 URL의 마지막 수정일, 변경 빈도, 우선순위 정보를 포함하여 검색 엔진의 크롤링 효율을 최적화했습니다.
-*   **robots.txt 수정:** `robots.txt` 파일에 생성된 `sitemap.xml` 파일의 위치를 명시(`Sitemap: https://bazi-2ix.pages.dev/sitemap.xml`)하여, 검색 로봇이 사이트 구조를 더 쉽게 파악하도록 안내했습니다. 기존의 `Allow: /` 규칙은 유지하여 모든 콘텐츠가 검색 엔진에 의해 접근 가능하도록 설정했습니다.
+*   **robots.txt 최적화:** `robots.txt` 파일을 수정하여 검색 엔진의 크롤링 동작을 세밀하게 제어했습니다. 사이트맵 위치를 명시하고, 검색 결과에 불필요한 법적/관리적 페이지(`privacy.html` 등) 및 개발 관련 파일들의 크롤링을 제외하는 `Disallow` 규칙을 추가하여 SEO 효율을 높였습니다.
 
 ### 7단계: 핵심 기능 로직 구현 (진행 예정)
 
