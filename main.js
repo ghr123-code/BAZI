@@ -187,3 +187,16 @@ class SajuCalculator extends HTMLElement {
 }
 
 customElements.define('saju-calculator', SajuCalculator);
+
+// --- Navigation Toggle for Mobile --- //
+document.addEventListener('DOMContentLoaded', () => {
+    const navToggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('header nav');
+
+    if (navToggle && nav) {
+        navToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            navToggle.classList.toggle('active');
+        });
+    }
+});
